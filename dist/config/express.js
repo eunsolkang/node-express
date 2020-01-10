@@ -17,6 +17,7 @@ const routes_1 = __importDefault(require("../api/routes"));
 const morgan_1 = __importDefault(require("morgan"));
 const express_session_1 = __importDefault(require("express-session"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const helmet_1 = __importDefault(require("helmet"));
 const error = __importStar(require("./error"));
 const app = express_1.default();
 app.use(body_parser_1.default.urlencoded({ extended: true }));
@@ -35,18 +36,9 @@ app.set('jwt-secret', vars_1.default.secret);
 app.use(morgan_1.default('dev'));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
+app.use(helmet_1.default());
 app.use(express_1.default.static("public"));
-// catch 404 and forward to error handler
-// error handler
 app.use("/v1", routes_1.default);
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-    console.log('ERROR!');
-    // render the error page
-    res.status(err.status || 500);
-});
 app.use(error.converter);
 app.use(error.handler);
 app.use(error.notFound);
