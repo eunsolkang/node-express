@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const User_1 = __importDefault(require("../../models/User"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const Auth_1 = __importDefault(require("../../modules/Auth"));
+const Auth_1 = require("../../modules/Auth");
 const router = express_1.default.Router();
 router.post('/register', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { user_id, user_pw } = req.body;
@@ -73,11 +73,11 @@ router.post('/login', (req, res, next) => __awaiter(void 0, void 0, void 0, func
         }
     }
 }));
-router.use(Auth_1.default);
 router.get('/check', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = yield Auth_1.jwtCheck(req, res, next);
     res.send({
         status: 200,
-        data: req.decode
+        data: data
     });
 }));
 exports.default = router;

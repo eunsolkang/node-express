@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const jwtCheck = ((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.jwtCheck = ((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.headers['x-access-token'] || req.query.token;
     if (!token) {
         return res.status(403).json({
@@ -22,11 +22,9 @@ const jwtCheck = ((req, res, next) => __awaiter(void 0, void 0, void 0, function
         });
     }
     try {
-        req.decode = yield jsonwebtoken_1.default.verify(token, req.app.get('jwt-secret'));
-        next();
+        return yield jsonwebtoken_1.default.verify(token, req.app.get('jwt-secret'));
     }
     catch (error) {
         next(error);
     }
 }));
-exports.default = jwtCheck;
