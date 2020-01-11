@@ -1,7 +1,6 @@
 import express from "express";
 import User from "../../models/User"
 import jwt from 'jsonwebtoken';
-import { jwtCheck } from '../../modules/Auth'
 
 const router = express.Router();
 
@@ -71,10 +70,22 @@ router.post('/login', async(req, res, next) =>{
 });
 
 router.get('/check', async(req : any, res, next) => {
-    const data = await jwtCheck(req, res, next);
-    res.send({
-        status : 200,
-        data : data
-    });
+        const token : String = req.headers['x-access-token'] || req.query.token;
+        if(!token) {
+            return res.status(403).json({
+                success: false,
+                message: 'not logged in'
+            })
+        }
+        try{
+            const data =  await jwt.verify(token, req.app.get('jwt-secret'));
+            res.send({
+                status : 200,
+                data : data
+            });
+        }catch(error){
+            next(error);
+        }
+    
 })
 export default router;
