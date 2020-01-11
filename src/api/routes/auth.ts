@@ -1,7 +1,7 @@
 import express from "express";
 import User from "../../models/User"
 import jwt from 'jsonwebtoken';
-import jwtCheck  from '../../modules/Auth'
+import { jwtCheck } from '../../modules/Auth'
 
 const router = express.Router();
 
@@ -70,11 +70,11 @@ router.post('/login', async(req, res, next) =>{
 
 });
 
-router.use(jwtCheck);
 router.get('/check', async(req : any, res, next) => {
+    const data = await jwtCheck(req, res, next);
     res.send({
         status : 200,
-        data : req.decode
+        data : data
     });
 })
 export default router;

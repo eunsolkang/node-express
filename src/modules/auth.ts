@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const jwtCheck =  (async(req, res, next) => {
+export const jwtCheck =  (async(req, res, next) => {
     const token : String = req.headers['x-access-token'] || req.query.token;
     if(!token) {
         return res.status(403).json({
@@ -9,13 +9,12 @@ const jwtCheck =  (async(req, res, next) => {
         })
     }
     try{
-        req.decode =  await jwt.verify(token, req.app.get('jwt-secret'));
-        next();
+        return await jwt.verify(token, req.app.get('jwt-secret'));
+        
     }catch(error){
         next(error);
     }
 
 });
 
-export default jwtCheck;
 
