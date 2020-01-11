@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const User_1 = __importDefault(require("../../models/User"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const Auth_1 = require("../../modules/Auth");
 const router = express_1.default.Router();
 router.post('/register', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { user_id, user_pw } = req.body;
@@ -74,10 +73,22 @@ router.post('/login', (req, res, next) => __awaiter(void 0, void 0, void 0, func
     }
 }));
 router.get('/check', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = yield Auth_1.jwtCheck(req, res, next);
-    res.send({
-        status: 200,
-        data: data
-    });
+    const token = req.headers['x-access-token'] || req.query.token;
+    if (!token) {
+        return res.status(403).json({
+            success: false,
+            message: 'not logged in'
+        });
+    }
+    try {
+        const data = yield jsonwebtoken_1.default.verify(token, req.app.get('jwt-secret'));
+        res.send({
+            status: 200,
+            data: data
+        });
+    }
+    catch (error) {
+        next(error);
+    }
 }));
 exports.default = router;
