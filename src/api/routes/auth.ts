@@ -11,6 +11,15 @@ router.post(
         res.json({
             user: req.user,
         })
+    }
+)
+router.get(
+    '/test',
+    (req, res) => {
+        // 생성된 유저를 확인!
+        res.json({
+            user: 'test'
+        })
     },
 )
 

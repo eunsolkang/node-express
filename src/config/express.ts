@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 app.use(express.static("public"));
 
-app.use(passport.initialize())
+app.use(passport.initialize());
 
 app.use("/v1", routes);
 app.use(error.converter);

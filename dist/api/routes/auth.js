@@ -12,4 +12,10 @@ router.post('/signup', passport_1.default.authenticate('local-signup', { session
         user: req.user,
     });
 });
+router.get('/test', (req, res) => {
+    // 생성된 유저를 확인!
+    res.json({
+        user: 'test'
+    });
+});
 exports.default = router;
