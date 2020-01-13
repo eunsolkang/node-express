@@ -3,11 +3,13 @@ import mongoose, { Schema } from "mongoose";
 export interface UserModel extends mongoose.Document {
   user_id : String;
   user_pw : String;
+  email : String;
   admin : Boolean;
 }
 const UserSchema: Schema<UserModel> = new Schema({
     user_id: String,
     user_pw: String,
+    email : String,
     admin : { type: Boolean, default: false }
 });
 

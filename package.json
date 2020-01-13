@@ -5,12 +5,15 @@
   "scripts": {
     "tsc": "tsc",
     "postinstall": "npm run tsc",
-    "start" : "tsc && node dist"
+    "start": "tsc && node dist"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.2",
     "@types/express-session": "^1.15.16",
+    "@types/jsonwebtoken": "^8.3.5",
     "@types/node": "^12.12.21",
+    "@types/passport": "^1.0.2",
+    "@types/passport-facebook": "^2.1.9",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.4",
@@ -25,6 +28,10 @@
     "mongoose": "^5.8.2",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "pug": "2.0.0-beta11",
     "puppeteer": "^2.0.0",
     "request": "^2.88.0",

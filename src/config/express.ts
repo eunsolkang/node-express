@@ -7,6 +7,8 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import * as error from "./error";
+import passport from 'passport'
+import '../passport/local-signup'
 
 const app = express();
 
@@ -27,12 +29,16 @@ app.use(session({
 
 app.set('jwt-secret', config.secret);
 
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(helmet());
 app.use(express.static("public"));
+
+app.use(passport.initialize())
 
 app.use("/v1", routes);
 app.use(error.converter);
