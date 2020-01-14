@@ -7,7 +7,6 @@ router.post('/', async(req, res, next)=>{
     try{
         const post = await new Post(req.body).save();
         res.send({status:200, data:post});
-
     }catch( error ){ 
         next(error);
     }

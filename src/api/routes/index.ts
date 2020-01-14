@@ -5,7 +5,7 @@ import path from "path";
 const router = express.Router();
 const indexJs = path.basename(__filename);
 
-router.get("/status", (req, res) => res.send("Ok"));
+router.get("/status", (req, res) => res.send("여소라 안뇽?"));
 console.log(fs.readdirSync(__dirname), indexJs);
 
 fs.readdirSync(__dirname)

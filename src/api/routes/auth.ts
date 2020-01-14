@@ -10,7 +10,7 @@ router.post(
         // 생성된 유저를 확인!
         res.json({
             user: req.user,
-        })
+        });
     }
 )
 router.get(
