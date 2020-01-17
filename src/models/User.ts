@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt' // 암호화 모듈
 export interface UserModel extends mongoose.Document {
   user_id : String;
   user_pw : String;
+  _id: string
 }
 const UserSchema: Schema<UserModel> = new Schema({
     user_id: String,
@@ -18,4 +19,4 @@ UserSchema.methods.validatePassword = function(user_pw: string): boolean {
   return bcrypt.compareSync(user_pw, this.user_pw)
 }
 
-export default  mongoose.model('user', UserSchema);
+export default mongoose.model('user', UserSchema);

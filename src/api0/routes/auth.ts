@@ -78,7 +78,7 @@ router.get('/check', async(req : any, res, next) => {
             })
         }
         try{
-            const data =  await jwt.verify(token, req.app.get('jwt-secret'));
+            const data = await jwt.verify(token, req.app.get('jwt-secret'));
             res.send({
                 status : 200,
                 data : data

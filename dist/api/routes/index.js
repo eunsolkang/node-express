@@ -8,7 +8,7 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const router = express_1.default.Router();
 const indexJs = path_1.default.basename(__filename);
-router.get("/status", (req, res) => res.send("Ok"));
+router.get("/status", (req, res) => res.send("OK!"));
 console.log(fs_1.default.readdirSync(__dirname), indexJs);
 fs_1.default.readdirSync(__dirname)
     .filter(file => file.indexOf(".") !== 0 && file !== indexJs && file.slice(-3) === ".js")
